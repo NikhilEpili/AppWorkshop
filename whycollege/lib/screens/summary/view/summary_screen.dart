@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../controller/summary_controller.dart';
 import '../widgets/threshold_dialog.dart';
-import '../widgets/custom_bottom_navbar.dart';
 import '../widgets/summary_card.dart';
 
 class SummaryScreen extends StatefulWidget {
@@ -40,22 +39,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
     );
   }
 
-  void _onBottomNavTap(int index) {
-    // Handle navigation to different screens
-    switch (index) {
-      case 0:
-        // Navigate to Home
-        // Navigator.pushReplacementNamed(context, '/home');
-        break;
-      case 1:
-        // Already on Dashboard
-        break;
-      case 2:
-        // Navigate to Timetable
-        // Navigator.pushReplacementNamed(context, '/timetable');
-        break;
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,10 +70,6 @@ class _SummaryScreenState extends State<SummaryScreen> {
             ],
           ),
           body: _buildBody(),
-          bottomNavigationBar: CustomBottomNavbar(
-            currentIndex: 1, // Dashboard is selected
-            onTap: _onBottomNavTap,
-          ),
         );
       },
     );

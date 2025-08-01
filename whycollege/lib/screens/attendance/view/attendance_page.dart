@@ -12,7 +12,6 @@ class AttendancePage extends StatefulWidget {
 
 class _AttendancePageState extends State<AttendancePage> {
   late AttendanceController _controller;
-  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -57,29 +56,6 @@ class _AttendancePageState extends State<AttendancePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddSubjectModal,
         child: const Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-          // TODO: Implement navigation to other pages
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.schedule),
-            label: 'Timetable',
-          ),
-        ],
       ),
     );
   }
