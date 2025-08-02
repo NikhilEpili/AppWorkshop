@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class CustomBottomNavbar extends StatelessWidget {
   final int currentIndex;
@@ -12,43 +13,19 @@ class CustomBottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF1F2937),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.2),
-            blurRadius: 8,
-            offset: const Offset(0, -2),
-          ),
-        ],
-      ),
-      child: BottomNavigationBar(
-        backgroundColor: const Color(0xFF1F2937),
-        selectedItemColor: const Color(0xFFF59E0B),
-        unselectedItemColor: const Color(0xFF9CA3AF),
-        currentIndex: currentIndex,
-        onTap: onTap,
-        type: BottomNavigationBarType.fixed,
-        elevation: 0,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_outlined),
-            activeIcon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.schedule_outlined),
-            activeIcon: Icon(Icons.schedule),
-            label: 'Timetable',
-          ),
-        ],
-      ),
+    return CurvedNavigationBar(
+      backgroundColor: Colors.transparent,
+      color: const Color(0xFF1F2937),
+      buttonBackgroundColor: const Color(0xFFF59E0B),
+      height: 65,
+      animationDuration: const Duration(milliseconds: 300),
+      index: currentIndex,
+      onTap: onTap,
+      items: const [
+        Icon(Icons.home_outlined, size: 24, color: Colors.white),
+        Icon(Icons.dashboard_outlined, size: 24, color: Colors.white),
+        Icon(Icons.schedule_outlined, size: 24, color: Colors.white),
+      ],
     );
   }
 }

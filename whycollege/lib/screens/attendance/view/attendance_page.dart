@@ -28,11 +28,14 @@ class _AttendancePageState extends State<AttendancePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF111827),
       appBar: AppBar(
         title: const Text('AppSprint'),
+        backgroundColor: const Color(0xFF111827),
+        foregroundColor: const Color(0xFFF9FAFB),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.settings, color: Color(0xFFF9FAFB)),
             onPressed: _showSettingsDialog,
           ),
         ],
@@ -55,6 +58,8 @@ class _AttendancePageState extends State<AttendancePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddSubjectModal,
+        backgroundColor: const Color(0xFFF59E0B),
+        foregroundColor: Colors.black,
         child: const Icon(Icons.add),
       ),
     );
@@ -67,6 +72,7 @@ class _AttendancePageState extends State<AttendancePage> {
     return Card(
       elevation: 3,
       shadowColor: const Color(0x1A000000),
+      color: const Color(0xFF1F2937),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
@@ -75,12 +81,12 @@ class _AttendancePageState extends State<AttendancePage> {
             end: Alignment.bottomRight,
             colors: meetsThreshold ? 
               [
-                AppTheme.successColor.withValues(alpha: 0.05),
-                AppTheme.successColor.withValues(alpha: 0.02),
+                const Color(0xFF10B981).withValues(alpha: 0.1),
+                const Color(0xFF10B981).withValues(alpha: 0.05),
               ] : 
               [
-                AppTheme.dangerColor.withValues(alpha: 0.05),
-                AppTheme.dangerColor.withValues(alpha: 0.02),
+                const Color(0xFFEF4444).withValues(alpha: 0.1),
+                const Color(0xFFEF4444).withValues(alpha: 0.05),
               ],
           ),
         ),
@@ -95,7 +101,11 @@ class _AttendancePageState extends State<AttendancePage> {
                   Expanded(
                     child: Text(
                       subject.name,
-                      style: AppTheme.headingSmall,
+                      style: const TextStyle(
+                        color: Color(0xFFF9FAFB),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -110,9 +120,9 @@ class _AttendancePageState extends State<AttendancePage> {
                         value: 'delete',
                         child: Row(
                           children: [
-                            Icon(Icons.delete, color: AppTheme.dangerColor),
-                            SizedBox(width: 8),
-                            Text('Delete'),
+                            const Icon(Icons.delete, color: Color(0xFFEF4444)),
+                            const SizedBox(width: 8),
+                            const Text('Delete', style: TextStyle(color: Color(0xFFF9FAFB))),
                           ],
                         ),
                       ),

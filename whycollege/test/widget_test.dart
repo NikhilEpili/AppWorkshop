@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 import 'package:whycollege/main.dart';
 
@@ -21,7 +22,7 @@ void main() {
     // Verify that the floating action button is present.
     expect(find.byIcon(Icons.add), findsOneWidget);
 
-    // Verify that the bottom navigation bar is present.
-    expect(find.byType(BottomNavigationBar), findsOneWidget);
+    // Verify that the curved navigation bar is present.
+    expect(find.byType(CurvedNavigationBar), findsOneWidget);
   });
 }

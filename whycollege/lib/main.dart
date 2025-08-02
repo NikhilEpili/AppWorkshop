@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:whycollege/screens/timetable/view/timetable_page.dart';
+import 'package:whycollege/screens/timetable/controller/timetable_controller.dart';
 import 'screens/attendance/view/attendance_page.dart';
 import 'screens/summary/view/summary_screen.dart';
 import 'theme.dart';
@@ -12,11 +16,45 @@ class AppSprintApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AppSprint',
-      theme: AppTheme.lightTheme,
-      home: const MainNavigationPage(),
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => TimetableController()),
+      ],
+      child: MaterialApp(
+        title: 'AppSprint',
+        theme: ThemeData(
+          primaryColor: const Color(0xFF111827),
+          scaffoldBackgroundColor: const Color(0xFF111827),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF111827),
+            foregroundColor: Color(0xFFF9FAFB),
+            elevation: 0,
+            titleTextStyle: TextStyle(
+              color: Color(0xFFF9FAFB),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          cardTheme: CardThemeData(
+            color: const Color(0xFF1F2937),
+            elevation: 2,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFF59E0B),
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
+        ),
+        home: const MainNavigationPage(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
@@ -34,98 +72,34 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
   final List<Widget> _pages = [
     const AttendancePage(),
     const SummaryScreen(),
-    const PlaceholderPage(), // Placeholder for Timetable
+    const TimetablePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF111827),
       body: IndexedStack(
         index: _currentIndex,
         children: _pages,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        color: const Color(0xFF1F2937),
+        buttonBackgroundColor: const Color(0xFFF59E0B),
+        height: 70,
+        animationDuration: const Duration(milliseconds: 300),
+        index: _currentIndex,
         onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
         },
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: AppTheme.surfaceColor,
-        selectedItemColor: AppTheme.accentColor,
-        unselectedItemColor: const Color(0xFF95A5A6),
-        elevation: 8,
-        selectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 12,
-        ),
-        unselectedLabelStyle: const TextStyle(
-          fontWeight: FontWeight.w400,
-          fontSize: 12,
-        ),
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_outlined),
-            activeIcon: Icon(Icons.dashboard),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.schedule_outlined),
-            activeIcon: Icon(Icons.schedule),
-            label: 'Timetable',
-          ),
+          Icon(Icons.home_outlined, size: 26, color: Colors.white),
+          Icon(Icons.dashboard_outlined, size: 26, color: Colors.white),
+          Icon(Icons.schedule_outlined, size: 26, color: Colors.white),
         ],
-      ),
-    );
-  }
-}
-
-// Placeholder page for Timetable (to be implemented later)
-class PlaceholderPage extends StatelessWidget {
-  const PlaceholderPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('AppSprint'),
-        backgroundColor: AppTheme.primaryColor,
-        foregroundColor: Colors.white,
-      ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.schedule,
-              size: 64,
-              color: Color(0xFF95A5A6),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Timetable Coming Soon',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF95A5A6),
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'This feature will be implemented soon',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xFF95A5A6),
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }
